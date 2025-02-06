@@ -18,7 +18,14 @@ Use paginate: $entries->appends(request()->except(['page','_token']))->links()
           @foreach ($entries as $entryDetail)
           <div class="col-sm-6 col-lg-4">
           {{-- Render entry single --}}
-          @include($GP247TemplatePath.'.common.entry_single', ['entry' => $entryDetail])
+          @php
+            $item['thumb'] = $entryDetail->getThumb();
+            $item['url'] = $entryDetail->getUrl();
+            $item['title'] = $entryDetail->title;
+            $item['description'] = $entryDetail->description;
+            $item['created_at'] = $entryDetail->created_at;
+          @endphp
+          @include($GP247TemplatePath.'.common.item_single_long', ['item' => $item])
           {{-- //Render entry single --}}
           </div>
           @endforeach

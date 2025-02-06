@@ -14,6 +14,20 @@ Use paginate: $entries->appends(request()->except(['page','_token']))->links()
 <section class="section section-xl bg-default">
   <div class="container">
     <div class="row row-30">
+    @if ($itemsList->count())
+    @foreach ($itemsList as $item)
+        @php
+            $item = [
+              'title' => $item->title,
+              'url' => $item->getUrl(),
+              'thumb' => $item->getThumb(),
+            ];
+        @endphp
+       @include($GP247TemplatePath.'.common.item_single', ['item' => $item])
+    @endforeach
+    @else
+    {!! gp247_language_render('front.no_item') !!}
+    @endif
 
     </div>
 
