@@ -50,7 +50,7 @@ class ExtensionModel
     {
         $link = FrontLink::create(
             [
-                'name' => $this->appPath.'::'. $this->configKey . '.news_content',
+                'name' => $this->appPath.'::'. $this->configKey . '.front.index',
                 'url' => 'route::news.index',
                 'target' => '_self',
                 'module' => $this->configKey,

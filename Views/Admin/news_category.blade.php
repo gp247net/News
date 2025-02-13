@@ -162,7 +162,7 @@
                                         value="{!! old('image',$category['image']??'') !!}"
                                         class="form-control input image" placeholder="" />
                                     <div class="input-group-append">
-                                        <a data-input="image" data-preview="preview_image" data-type="news-image"
+                                        <a data-input="image" data-preview="preview_image" data-type="docs"
                                             class="btn btn-primary lfm">
                                             <i class="fa fa-image"></i> {{gp247_language_render('action.choose_image')}}
                                         </a>

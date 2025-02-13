@@ -119,7 +119,7 @@ class FrontController extends RootFrontController
                         'newsCategory' => $newsCategory,
                         'layout_page' => 'news_category',
                         'breadcrumbs' => [
-                            ['url'    => gp247_route_front('news.index'), 'title' => gp247_language_render($this->plugin->appPath.'::News.front.categories')],
+                            ['url'    => gp247_route_front('news.index'), 'title' => gp247_language_render($this->plugin->appPath.'::News.front.index')],
                             ['url'    => '', 'title' => $newsCategory['title']],
                         ],
                     )

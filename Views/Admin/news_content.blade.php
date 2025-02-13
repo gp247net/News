@@ -183,7 +183,7 @@
                                         value="{{ old('image',$content['image']??'') }}"
                                         class="form-control input-sm image" placeholder="" />
                                     <div class="input-group-append">
-                                        <a data-input="image" data-preview="preview_image" data-type="news-image"
+                                        <a data-input="image" data-preview="preview_image" data-type="docs"
                                             class="btn btn-primary lfm">
                                             <i class="fa fa-image"></i> {{gp247_language_render('action.choose_image')}}
                                         </a>
@@ -216,7 +216,7 @@
                                         <div class="input-group">
                                             <input type="text" id="image_additional_{{ $key }}" name="images[]" value="{{ $image->image }}" class="form-control input-sm image" placeholder="">
                                             <div class="input-group-append">
-                                                <a data-input="image_additional_{{ $key }}" data-preview="preview_image_{{ $key }}" data-type="news-image" class="btn btn-primary lfm">
+                                                <a data-input="image_additional_{{ $key }}" data-preview="preview_image_{{ $key }}" data-type="docs" class="btn btn-primary lfm">
                                                     <i class="fa fa-image"></i> {{gp247_language_render('action.choose_image')}}
                                                 </a>
                                             </div>
@@ -344,8 +344,8 @@
 <script type="text/javascript">
     $('textarea.editor').ckeditor(
     {
-        filebrowserImageBrowseUrl: '{{ gp247_route_admin('admin.home').'/'.config('lfm.url_prefix') }}?type=news-image',
-        filebrowserImageUploadUrl: '{{ gp247_route_admin('admin.home').'/'.config('lfm.url_prefix') }}/upload?type=news-image&_token={{csrf_token()}}',
+        filebrowserImageBrowseUrl: '{{ gp247_route_admin('admin.home').'/'.config('lfm.url_prefix') }}?type=docs',
+        filebrowserImageUploadUrl: '{{ gp247_route_admin('admin.home').'/'.config('lfm.url_prefix') }}/upload?type=docs&_token={{csrf_token()}}',
         filebrowserBrowseUrl: '{{ gp247_route_admin('admin.home').'/'.config('lfm.url_prefix') }}?type=Files',
         filebrowserUploadUrl: '{{ gp247_route_admin('admin.home').'/'.config('lfm.url_prefix') }}/upload?type=file&_token={{csrf_token()}}',
         filebrowserWindowWidth: '900',
@@ -360,7 +360,7 @@ $(document).ready(function() {
             <div class="input-group">
                 <input type="text" id="image_additional_${id}" name="images[]" value="" class="form-control input-sm image" placeholder="">
                 <div class="input-group-append">
-                    <a data-input="image_additional_${id}" data-preview="preview_image_${id}" data-type="news-image" class="btn btn-primary lfm">
+                    <a data-input="image_additional_${id}" data-preview="preview_image_${id}" data-type="docs" class="btn btn-primary lfm">
                         <i class="fa fa-image"></i> {{gp247_language_render('action.choose_image')}}
                     </a>
                 </div>
