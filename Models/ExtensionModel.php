@@ -36,8 +36,8 @@ class ExtensionModel
         (new NewsContent)->uninstall();
 
         //Remove menu
-        (new AdminMenu)->where('uri', 'route::admin_news_category.index')->delete();
-        (new AdminMenu)->where('uri', 'route::admin_news_content.index')->delete();
+        (new AdminMenu)->where('uri', 'route_admin::admin_news_category.index')->delete();
+        (new AdminMenu)->where('uri', 'route_admin::admin_news_content.index')->delete();
         $checkMenu = (new AdminMenu)->where('key', $this->configKey)->first();
         if ($checkMenu) {
             if (!(new AdminMenu)->where('parent_id', $checkMenu->id)->count()) {
@@ -85,7 +85,7 @@ class ExtensionModel
                 'parent_id' => $position,
                 'title' => $this->appPath.'::'.$this->configKey . '.news_category',
                 'icon' => 'far fa-folder-open',
-                'uri' => 'route::admin_news_category.index',
+                'uri' => 'route_admin::admin_news_category.index',
             ]
         );
         AdminMenu::insert(
@@ -93,7 +93,7 @@ class ExtensionModel
                 'parent_id' => $position,
                 'title' => $this->appPath.'::'.$this->configKey . '.news_content',
                 'icon' => 'far fa-copy',
-                'uri' => 'route::admin_news_content.index',
+                'uri' => 'route_admin::admin_news_content.index',
             ]
         );
     }

@@ -6,7 +6,7 @@
     "link": "https://GP247.net",
     "configGroup": "Plugins",
     "configKey": "News",
-    "version": "1.0",
+    "version": "1.0.2",
     "requireCore": ["1.0"],
     "requirePackages": ["gp247/front"],
     "requireExtensions": []
