@@ -1,8 +1,8 @@
 <?php
 namespace App\GP247\Plugins\News\Admin;
 
-use GP247\Core\Admin\Controllers\RootAdminController;
-use GP247\Core\Admin\Models\AdminLanguage;
+use GP247\Core\Controllers\RootAdminController;
+use GP247\Core\Models\AdminLanguage;
 use App\GP247\Plugins\News\Models\NewsCategory;
 use App\GP247\Plugins\News\Models\NewsContent;
 use App\GP247\Plugins\News\AppConfig;

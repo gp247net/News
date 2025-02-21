@@ -3,7 +3,7 @@
 namespace App\GP247\Plugins\News\Models;
 
 use Illuminate\Support\Facades\DB;
-use GP247\Core\Admin\Models\AdminMenu;
+use GP247\Core\Models\AdminMenu;
 use GP247\Front\Models\FrontLink;
 use GP247\Front\Models\FrontLinkStore;
 use App\GP247\Plugins\News\Models\NewsCategory;

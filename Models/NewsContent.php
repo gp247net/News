@@ -8,14 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
-use GP247\Core\Admin\Models\ModelTrait;
+use GP247\Core\Models\ModelTrait;
 use App\GP247\Plugins\News\Models\NewsContentDescription;
 use Cache;
 
 class NewsContent extends Model
 {
     use ModelTrait;
-    use \GP247\Core\Admin\Models\UuidTrait;
+    use \GP247\Core\Models\UuidTrait;
     
     protected static $getListTitleAdmin = null;
     protected static $getListContentGroupByParentAdmin = null;

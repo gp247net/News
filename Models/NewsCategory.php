@@ -5,13 +5,13 @@ namespace App\GP247\Plugins\News\Models;
 use App\GP247\Plugins\News\Models\NewsCategoryDescription;
 use App\GP247\Plugins\News\Models\NewsContent;
 use Illuminate\Database\Eloquent\Model;
-use GP247\Core\Admin\Models\ModelTrait;
+use GP247\Core\Models\ModelTrait;
 use Cache;
 
 class NewsCategory extends Model
 {
     use ModelTrait;
-    use \GP247\Core\Admin\Models\UuidTrait;
+    use \GP247\Core\Models\UuidTrait;
 
 
     protected static $getListTitleAdmin = null;
