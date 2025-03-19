@@ -51,7 +51,7 @@ class ExtensionModel
         $link = FrontLink::create(
             [
                 'name' => $this->appPath.'::'. $this->configKey . '.front.index',
-                'url' => 'route::news.index',
+                'url' => 'route_front::news.index',
                 'target' => '_self',
                 'module' => $this->configKey,
                 'group' => 'menu',
@@ -60,7 +60,7 @@ class ExtensionModel
             ]
         );
         $linkId = $link->id;
-        FrontLinkStore::insert(['store_id' => GP247_STORE_ID_GLOBAL, 'link_id' => $linkId]);
+        FrontLinkStore::insert(['store_id' => GP247_STORE_ID_ROOT, 'link_id' => $linkId]);
         
         $checkMenu = AdminMenu::where('key',$this->configKey)->first();
         if ($checkMenu) { 
