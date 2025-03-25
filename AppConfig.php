@@ -19,6 +19,7 @@ class AppConfig extends ExtensionConfigDefault
         $config = json_decode($config, true);
     	$this->configGroup = $config['configGroup'];
         $this->configKey = $config['configKey'];
+        $this->configCode = $config['configCode'];
         $this->requireCore = $config['requireCore'] ?? [];
         $this->requirePackages = $config['requirePackages'] ?? [];
         $this->requireExtensions = $config['requireExtensions'] ?? [];
@@ -46,8 +47,8 @@ class AppConfig extends ExtensionConfigDefault
             $dataInsert = [
                 [
                     'group'  => $this->configGroup,
+                    'code'    => $this->configCode,
                     'key'    => $this->configKey,
-                    'code'    => $this->configKey,
                     'sort'   => 0,
                     'store_id' => GP247_STORE_ID_GLOBAL,
                     'value'  => self::ON, //Enable extension
@@ -150,6 +151,7 @@ class AppConfig extends ExtensionConfigDefault
         $arrData = [
             'title' => $this->title,
             'key' => $this->configKey,
+            'code' => $this->configCode,
             'image' => $this->image,
             'permission' => self::ALLOW,
             'version' => $this->version,
