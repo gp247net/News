@@ -34,10 +34,6 @@ Use paginate: $entries->appends(request()->except(['page','_token']))->links()
   </div>
 </section>
 
-   {{-- Render include view --}}
-   @include($GP247TemplatePath.'.common.include_view')
-   {{--// Render include view --}}
-
 @endsection
 
 
