@@ -109,6 +109,7 @@ class FrontController extends RootFrontController
                     ->setLimit(gp247_config('item_list'))
                     ->setPaginate()
                     ->getData();
+                gp247_check_view($this->plugin->appPath.'::news_category');
                 return view(
                     $this->plugin->appPath.'::news_category',
                     array(
@@ -125,7 +126,8 @@ class FrontController extends RootFrontController
                     )
                 );
             } else {
-                return view('GP247TemplatePath::'.gp247_store_info('template') . '.notfound',
+                gp247_check_view('GP247TemplatePath::'.gp247_store_info('template') . '.screen.notfound');
+                return view('GP247TemplatePath::'.gp247_store_info('template') . '.screen.notfound',
                     array(
                         'title'       => gp247_language_render('front.notfound'),
                         'description' => '',
@@ -171,7 +173,8 @@ class FrontController extends RootFrontController
             $categoryNews = $newsContent->category;
 
             if (!$categoryNews || $categoryNews->alias != $category) {
-                return view('GP247TemplatePath::'.gp247_store_info('template') . '.notfound',
+                gp247_check_view('GP247TemplatePath::'.gp247_store_info('template') . '.screen.notfound');
+                return view('GP247TemplatePath::'.gp247_store_info('template') . '.screen.notfound',
                     array(
                         'title'       => gp247_language_render('front.notfound'),
                         'description' => '',
@@ -181,6 +184,7 @@ class FrontController extends RootFrontController
                 );
             }
 
+            gp247_check_view($this->plugin->appPath.'::news_detail');
             $title = ($newsContent) ? $newsContent->title : gp247_language_render('front.notfound');
             return view($this->plugin->appPath.'::news_detail',
                 array(
@@ -197,7 +201,8 @@ class FrontController extends RootFrontController
                 )
             );
         } else {
-            return view('GP247TemplatePath::'.gp247_store_info('template') . '.notfound',
+            gp247_check_view('GP247TemplatePath::'.gp247_store_info('template') . '.screen.notfound');
+            return view('GP247TemplatePath::'.gp247_store_info('template') . '.screen.notfound',
                 array(
                     'title'       => gp247_language_render('front.notfound'),
                     'description' => '',
