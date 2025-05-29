@@ -168,11 +168,11 @@ class FrontController extends RootFrontController
     private function _content($category, $alias)
     {
         $newsContent = (new NewsContent)->getDetail($alias, 'alias');
-        if ($newsContent) {
 
+        if ($newsContent) {
             $categoryNews = $newsContent->category;
 
-            if (!$categoryNews || $categoryNews->alias != $category) {
+            if (!$categoryNews) {
                 gp247_check_view('GP247TemplatePath::'.gp247_store_info('template') . '.screen.notfound');
                 return view('GP247TemplatePath::'.gp247_store_info('template') . '.screen.notfound',
                     array(
@@ -182,6 +182,10 @@ class FrontController extends RootFrontController
                         'msg'         => gp247_language_render('front.notfound_detail'),
                     )
                 );
+            }
+
+            if ($categoryNews->alias != $category) {
+                return redirect(gp247_route_front('news.content', ['category' => $categoryNews->alias, 'alias' => $alias]));
             }
 
             gp247_check_view($this->plugin->appPath.'::news_detail');
