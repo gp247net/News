@@ -173,7 +173,7 @@ class NewsCategoryController extends RootAdminController
         $dataInsert = [
             'image'    => $data['image'],
             'alias'    => $data['alias'],
-            'parent'   => (int) $data['parent'],
+            'parent'   => $data['parent'],
             'status'   => !empty($data['status']) ? 1 : 0,
             'sort'     => (int) $data['sort'],
             'store_id' => session('adminStoreId'),
