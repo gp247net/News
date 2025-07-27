@@ -31,7 +31,7 @@ Use paginate: $entries->appends(request()->except(['page','_token']))->links()
           @endforeach
 
         {{-- Render pagination --}}
-        @include($GP247TemplatePath.'.common.pagination', ['entries' => $entries])
+        @include($GP247TemplatePath.'.common.pagination', ['items' => $entries])
         {{--// Render pagination --}}
 
       @else
