@@ -53,19 +53,22 @@ class FrontController extends RootFrontController
             $sortOrder = $filterArr[$filter_sort][1];
         }
 
-        $itemsList = (new NewsCategory)
+        $entries = (new NewsCategory)
             ->getCategoryRoot()
             ->setSort([$sortBy, $sortOrder])
             ->setPaginate()
             ->setLimit(gp247_config('item_list'))
             ->getData();
 
-        gp247_check_view($this->plugin->appPath.'::news_index');
+        $subPath = 'news_index';
+        $view = gp247_plugin_process_view($this->plugin->appPath, $this->GP247TemplatePath,$subPath);
+        gp247_check_view($view);
+
         return view(
-            $this->plugin->appPath.'::news_index',
+            $view,
             array(
                 'title'       => gp247_language_render($this->plugin->appPath.'::News.front.index'),
-                'itemsList'   => $itemsList,
+                'entries'   => $entries,
                 'keyword'     => '',
                 'description' => '',
                 'layout_page' => 'news_index',
@@ -109,9 +112,13 @@ class FrontController extends RootFrontController
                     ->setLimit(gp247_config('item_list'))
                     ->setPaginate()
                     ->getData();
-                gp247_check_view($this->plugin->appPath.'::news_category');
+
+                $subPath = 'news_category';
+                $view = gp247_plugin_process_view($this->plugin->appPath, $this->GP247TemplatePath,$subPath);
+                gp247_check_view($view);
+
                 return view(
-                    $this->plugin->appPath.'::news_category',
+                    $view,
                     array(
                         'title'       => $newsCategory['title'],
                         'description' => $newsCategory['description'],
@@ -173,8 +180,10 @@ class FrontController extends RootFrontController
             $categoryNews = $newsContent->category;
 
             if (!$categoryNews) {
-                gp247_check_view('GP247TemplatePath::'.gp247_store_info('template') . '.screen.notfound');
-                return view('GP247TemplatePath::'.gp247_store_info('template') . '.screen.notfound',
+
+
+                gp247_check_view($this->GP247TemplatePath.'.screen.notfound');
+                return view($this->GP247TemplatePath.'.screen.notfound',
                     array(
                         'title'       => gp247_language_render('front.notfound'),
                         'description' => '',
@@ -188,9 +197,12 @@ class FrontController extends RootFrontController
                 return redirect(gp247_route_front('news.content', ['category' => $categoryNews->alias, 'alias' => $alias]));
             }
 
-            gp247_check_view($this->plugin->appPath.'::news_detail');
+            $subPath = 'news_detail';
+            $view = gp247_plugin_process_view($this->plugin->appPath, $this->GP247TemplatePath,$subPath);
+            gp247_check_view($view);
+
             $title = ($newsContent) ? $newsContent->title : gp247_language_render('front.notfound');
-            return view($this->plugin->appPath.'::news_detail',
+            return view($view,
                 array(
                     'title'           => $title,
                     'newsContent'     => $newsContent,
@@ -205,8 +217,8 @@ class FrontController extends RootFrontController
                 )
             );
         } else {
-            gp247_check_view('GP247TemplatePath::'.gp247_store_info('template') . '.screen.notfound');
-            return view('GP247TemplatePath::'.gp247_store_info('template') . '.screen.notfound',
+            gp247_check_view($this->GP247TemplatePath.'.screen.notfound');
+            return view($this->GP247TemplatePath.'.screen.notfound',
                 array(
                     'title'       => gp247_language_render('front.notfound'),
                     'description' => '',

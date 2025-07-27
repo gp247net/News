@@ -14,19 +14,24 @@ Use paginate: $entries->appends(request()->except(['page','_token']))->links()
 <section class="section section-xl bg-default">
   <div class="container">
     <div class="row row-30">
-    @if ($itemsList->count())
-    @foreach ($itemsList as $item)
-        @php
-            $item = [
-              'title' => $item->title,
-              'url' => $item->getUrl(),
-              'thumb' => $item->getThumb(),
-            ];
-        @endphp
-       @include($GP247TemplatePath.'.common.item_single', ['item' => $item])
-    @endforeach
+    @if ($entries->count())
+      @foreach ($entries as $item)
+          @php
+              $item = [
+                'title' => $item->title,
+                'url' => $item->getUrl(),
+                'thumb' => $item->getThumb(),
+              ];
+          @endphp
+        @include($GP247TemplatePath.'.common.item_single', ['item' => $item])
+      @endforeach
+
+      {{-- Render pagination --}}
+      @include($GP247TemplatePath.'.common.pagination', ['items' => $entries])
+      {{--// Render pagination --}}
+
     @else
-    {!! gp247_language_render('front.no_item') !!}
+      {!! gp247_language_render('front.no_item') !!}
     @endif
 
     </div>
