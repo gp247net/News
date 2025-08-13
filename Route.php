@@ -20,7 +20,7 @@ if(gp247_extension_check_active($config['configGroup'], $config['configKey'])) {
             ->name('news.index');
             Route::get($prefixNewsCategory.'/{alias}', 'FrontController@categoryProcessFront')
                 ->name('news.category');
-            Route::get('{category}/{alias}'.$suffix, 'FrontController@contentProcessFront')
+            Route::get($prefixNewsCategory.'/{category}/{alias}'.$suffix, 'FrontController@contentProcessFront')
                 ->name('news.content');
         }
     );
