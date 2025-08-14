@@ -1,13 +1,13 @@
 {
     "name": "NEWS module",
-    "image": "images/logo.jpg",
+    "image": "images/news.jpg",
     "auth": "GP247",
     "email": "support@gp247.net",
     "link": "https://GP247.net",
     "configGroup": "Plugins",
     "configCode": "Cms",
     "configKey": "News",
-    "version": "1.1.7",
+    "version": "1.1.8",
     "requireCore": ["1.1"],
     "requirePackages": ["gp247/front"],
     "requireExtensions": []
