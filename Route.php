@@ -8,7 +8,7 @@ if(gp247_extension_check_active($config['configGroup'], $config['configKey'])) {
 
     $langUrl = GP247_SEO_LANG ?'{lang?}/' : '';
     $suffix = GP247_SUFFIX_URL;
-    $prefixNewsCategory = config($config['configGroup'].'/'.$config['configKey'].'.GP247_PREFIX_CATEGORY');
+    $prefixNewsCategory = config($config['configGroup'].'/'.$config['configKey'].'.GP247_PREFIX_NEWS');
     Route::group(
         [
             'middleware' => GP247_FRONT_MIDDLEWARE,
