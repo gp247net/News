@@ -139,7 +139,7 @@ class NewsCategory extends Model
         //Uuid
         static::creating(function ($model) {
             if (empty($model->{$model->getKeyName()})) {
-                $model->{$model->getKeyName()} = gp247_generate_id($type = 'news_category');
+                $model->{$model->getKeyName()} = gp247_generate_id();
             }
         });
     }
@@ -199,11 +199,7 @@ class NewsCategory extends Model
      * Set category parent
      */
     public function setParent($parent) {
-        if ($parent === 'all') {
-            $this->gp247_parent = $parent;
-        } else {
-            $this->gp247_parent = $parent;
-        }
+        $this->gp247_parent = $parent;
         return $this;
     }
 
@@ -211,7 +207,7 @@ class NewsCategory extends Model
      * Category root
      */
     public function getCategoryRoot() {
-        $this->setParent(0);
+        $this->setParent(null);
         return $this;
     }
 
@@ -237,7 +233,15 @@ class NewsCategory extends Model
         ->where('store_id', config('app.storeId'));
 
         if ($this->gp247_parent !== 'all') {
-            $query = $query->where('parent', $this->gp247_parent);
+            if (empty($this->gp247_parent)) {
+                // Parent is root with parent is null or empty
+                $query = $query->where(function ($sql) {
+                    $sql->where('parent', "")
+                        ->orWhereNull('parent');
+                });
+            } else {
+                $query = $query->where('parent', $this->gp247_parent);
+            }
         }
 
         $query = $this->processMoreQuery($query);
@@ -395,7 +399,7 @@ class NewsCategory extends Model
     public static function getListCategoryGroupByParentAdmin()
     {
         if (self::$getListCategoryGroupByParentAdmin === null) {
-            self::$getListCategoryGroupByParentAdmin = self::select('id', 'parent')
+            self::$getListCategoryGroupByParentAdmin = self::selectRaw('id, COALESCE(NULLIF(parent, ""), NULLIF(parent, 0), 0) as parent')
             ->where('store_id', session('adminStoreId'))
             ->get()
             ->groupBy('parent')

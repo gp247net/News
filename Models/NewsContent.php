@@ -79,7 +79,7 @@ class NewsContent extends Model
         //Uuid
         static::creating(function ($model) {
             if (empty($model->{$model->getKeyName()})) {
-                $model->{$model->getKeyName()} = gp247_generate_id($type = 'news_content');
+                $model->{$model->getKeyName()} = gp247_generate_id();
             }
         });
     }
@@ -289,7 +289,7 @@ class NewsContent extends Model
         $schema->create($tableCategory, function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('image', 100)->nullable();
-            $table->uuid('parent')->default(0);
+            $table->uuid('parent')->default(null)->nullable();
             $table->string('alias', 120)->index();
             $table->uuid('store_id')->default(1)->index();
             $table->integer('sort')->default(0);
@@ -308,8 +308,8 @@ class NewsContent extends Model
 
         DB::connection(GP247_DB_CONNECTION)->table($tableCategory)->insert(
             [
-                ['id' => '1', 'alias'=> 'du-lich', 'image' => 'https://picsum.photos/400/300?random=1', 'parent' => '0', 'sort' => '0', 'status' => '1', 'store_id' => 1],
-                ['id' => '2', 'alias'=> 'am-thuc', 'image' => 'https://picsum.photos/400/300?random=2', 'parent' => '0', 'sort' => '0', 'status' => '1', 'store_id' => 1],
+                ['id' => '1', 'alias'=> 'du-lich', 'image' => 'https://picsum.photos/400/300?random=1', 'parent' => '', 'sort' => '0', 'status' => '1', 'store_id' => 1],
+                ['id' => '2', 'alias'=> 'am-thuc', 'image' => 'https://picsum.photos/400/300?random=2', 'parent' => '', 'sort' => '0', 'status' => '1', 'store_id' => 1],
             ]
         );
 

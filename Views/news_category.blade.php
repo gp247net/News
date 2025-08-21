@@ -13,6 +13,25 @@ Use paginate: $entries->appends(request()->except(['page','_token']))->links()
 @section('block_main')
 <section class="section section-xl bg-default">
   <div class="container">
+
+    @if ($subCategories->count())
+      @foreach ($subCategories as $cate)
+          @php
+              $cate = [
+                'title' => $cate->title,
+                'url' => $cate->getUrl(),
+                'thumb' => $cate->getThumb(),
+              ];
+          @endphp
+        @include($GP247TemplatePath.'.common.item_single', ['item' => $cate])
+      @endforeach
+
+      {{-- Render pagination --}}
+      @include($GP247TemplatePath.'.common.pagination', ['items' => $subCategories])
+      {{--// Render pagination --}}
+    @endif
+
+
     <div class="row row-30">
       @if ($entries->count())
           @foreach ($entries as $entryDetail)

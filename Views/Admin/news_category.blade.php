@@ -117,10 +117,7 @@
                                 class="col-sm-2 col-form-label">{{ gp247_language_render($appPath.'::Category.admin.select_parent') }}</label>
                             <div class="col-sm-8">
                                 <select class="form-control parent select2" style="width: 100%;" name="parent">
-                                    <option value=""></option>
-                                    @php
-                                    $categories = [0=>'==ROOT==']+ $categories;
-                                    @endphp
+                                    <option value="">== ROOT ==</option>
                                     @foreach ($categories as $k => $v)
                                     <option value="{{ $k }}"
                                         {{ (old('parent',$category['parent']??'') ==$k) ? 'selected':'' }}>{{ $v }}

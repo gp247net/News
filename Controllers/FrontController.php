@@ -107,11 +107,33 @@ class FrontController extends RootFrontController
     {
         $newsCategory = (new NewsCategory)->getDetail($alias, 'alias');
             if ($newsCategory) { 
+
+                $subCategories = (new NewsCategory)
+                ->setParent($newsCategory->id)
+                ->setPaginate()
+                ->setLimit(gp247_config('item_list'))
+                ->getData();
+
                 $entries = (new NewsContent)
                     ->getContentToCategory($newsCategory->id)
                     ->setLimit(gp247_config('item_list'))
                     ->setPaginate()
                     ->getData();
+
+                // Process breadcrumbs
+                $parentCategory = (new NewsCategory)
+                    ->getDetail($newsCategory->parent, 'id');
+                $breadcrumbs = [];
+                $breadcrumbs[] = ['url'    => gp247_route_front('news.index'), 'title' => gp247_language_render($this->plugin->appPath.'::News.front.index')];
+                if ($parentCategory) {
+                    $breadcrumbs[] = [
+                        'url'    => $parentCategory->getUrl(),
+                        'title' => $parentCategory->title,
+                    ];
+                }
+                $breadcrumbs[] = ['url'    => '', 'title' => $newsCategory->title];
+                // End process breadcrumbs
+
 
                 $subPath = 'news_category';
                 $view = gp247_plugin_process_view($this->plugin->appPath, $this->GP247TemplatePath,$subPath);
@@ -125,11 +147,9 @@ class FrontController extends RootFrontController
                         'keyword'     => $newsCategory['keyword'],
                         'entries'     => $entries,
                         'newsCategory' => $newsCategory,
+                        'subCategories' => $subCategories,
                         'layout_page' => 'news_category',
-                        'breadcrumbs' => [
-                            ['url'    => gp247_route_front('news.index'), 'title' => gp247_language_render($this->plugin->appPath.'::News.front.index')],
-                            ['url'    => '', 'title' => $newsCategory['title']],
-                        ],
+                        'breadcrumbs' => $breadcrumbs,
                     )
                 );
             } else {

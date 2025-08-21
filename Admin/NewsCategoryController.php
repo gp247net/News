@@ -154,7 +154,6 @@ class NewsCategoryController extends RootAdminController
 
         $validator = Validator::make($data, [
             'sort' => 'numeric|min:0',
-            'parent' => 'required',
             'descriptions.*.title' => 'required|string|max:200',
             'descriptions.*.keyword' => 'nullable|string|max:200',
             'descriptions.*.description' => 'nullable|string|max:500',
@@ -173,7 +172,7 @@ class NewsCategoryController extends RootAdminController
         $dataInsert = [
             'image'    => $data['image'],
             'alias'    => $data['alias'],
-            'parent'   => $data['parent'],
+            'parent'   => $data['parent'] ?? null,
             'status'   => !empty($data['status']) ? 1 : 0,
             'sort'     => (int) $data['sort'],
             'store_id' => session('adminStoreId'),
@@ -247,7 +246,6 @@ class NewsCategoryController extends RootAdminController
 
         $validator = Validator::make($data, [
             'sort'                       => 'numeric|min:0',
-            'parent'                     => 'required',
             'descriptions.*.title'       => 'required|string|max:200',
             'descriptions.*.keyword'     => 'nullable|string|max:200',
             'descriptions.*.description' => 'nullable|string|max:500',
